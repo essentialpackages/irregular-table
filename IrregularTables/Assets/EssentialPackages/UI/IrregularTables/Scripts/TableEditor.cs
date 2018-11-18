@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
+using EssentialPackages.UI.IrregularTables.TextRegistration;
 using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables
@@ -18,8 +19,9 @@ namespace EssentialPackages.UI.IrregularTables
 
         protected void Awake()
         {
-            var table = new EssentialPackages.UI.IrregularTables.Table(_style);
-            TableLayout = new TableLayout(table);
+            var table = new Table(_style);
+            var textRegistry = new TextAdapterRegistry();
+            TableLayout = new TableLayout(table, textRegistry);
             Decorator = GetComponent<ITableDecorator>();
 
             Debug.Log(JsonUtility.ToJson(_tableData));
