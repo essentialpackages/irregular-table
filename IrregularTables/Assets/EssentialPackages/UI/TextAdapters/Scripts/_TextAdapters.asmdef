@@ -1,0 +1,10 @@
+{
+    "name": "_TextAdapters",
+    "references": [
+        "Unity.TextMeshPro"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
