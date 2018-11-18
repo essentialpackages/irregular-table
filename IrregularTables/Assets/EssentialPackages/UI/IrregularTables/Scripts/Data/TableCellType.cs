@@ -1,4 +1,4 @@
-﻿namespace Essential.Core.UI.Table.Data
+﻿namespace EssentialPackages.UI.IrregularTables.Data
 {
 	public enum TableCellType {
 		Empty,

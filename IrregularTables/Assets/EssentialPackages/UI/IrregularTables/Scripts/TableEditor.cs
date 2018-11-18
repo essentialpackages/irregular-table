@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
+using EssentialPackages.UI.IrregularTables.Data;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
     public class TableEditor : MonoBehaviour
     {
@@ -19,7 +18,7 @@ namespace Essential.Core.UI.Table
 
         protected void Awake()
         {
-            var table = new Table(_style);
+            var table = new EssentialPackages.UI.IrregularTables.Table(_style);
             TableLayout = new TableLayout(table);
             Decorator = GetComponent<ITableDecorator>();
 

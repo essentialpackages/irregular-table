@@ -1,7 +1,7 @@
 ﻿using Essential.Core.UI.Table.Interfaces;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
     [CreateAssetMenu(fileName = "TableStyle", menuName = "Essential/UI/Table/TableStyle", order = 1)]
     public class TableStyle : ScriptableObject, ITableStyle

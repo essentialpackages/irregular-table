@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table.Data
+namespace EssentialPackages.UI.IrregularTables.Data
 {
     [Serializable]
     public class TableData

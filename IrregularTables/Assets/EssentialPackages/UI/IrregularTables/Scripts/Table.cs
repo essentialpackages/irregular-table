@@ -1,10 +1,10 @@
 ﻿using System;
-using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
+using EssentialPackages.UI.IrregularTables.Data;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
 	public class Table : ITable
 	{

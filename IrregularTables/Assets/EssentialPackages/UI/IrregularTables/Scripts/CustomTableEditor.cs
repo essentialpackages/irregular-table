@@ -1,7 +1,6 @@
-﻿using Essential.Core.UI.Table.Data;
-using UnityEngine;
+﻿using EssentialPackages.UI.IrregularTables.Data;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
 	public class CustomTableEditor : TableEditor
 	{

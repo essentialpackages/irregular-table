@@ -4,7 +4,7 @@ using Essential.Core.UI.Table.Interfaces;
 using TMPro;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
 	public abstract class TextRegistry<T> : ITextRegistry<T>
 	{

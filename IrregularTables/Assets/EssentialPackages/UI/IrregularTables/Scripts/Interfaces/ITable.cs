@@ -1,4 +1,4 @@
-﻿using Essential.Core.UI.Table.Data;
+﻿using EssentialPackages.UI.IrregularTables.Data;
 using UnityEngine;
 
 namespace Essential.Core.UI.Table.Interfaces

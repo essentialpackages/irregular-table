@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table.Data
+namespace EssentialPackages.UI.IrregularTables.Data
 {
 	[Serializable]
 	public class TableCell : TableCellBase<string>

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table.Data
+namespace EssentialPackages.UI.IrregularTables.Data
 {
 	[Serializable]
 	public abstract class TableCellBase<T>

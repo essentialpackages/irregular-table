@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Essential.Core.UI.Table.Data;
 using Essential.Core.UI.Table.Interfaces;
+using EssentialPackages.UI.IrregularTables.Data;
 using TMPro;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table
+namespace EssentialPackages.UI.IrregularTables
 {
 	public class TableLayout
 	{
