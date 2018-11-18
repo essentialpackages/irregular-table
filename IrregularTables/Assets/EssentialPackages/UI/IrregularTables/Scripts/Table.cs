@@ -1,6 +1,6 @@
 ﻿using System;
-using Essential.Core.UI.Table.Interfaces;
 using EssentialPackages.UI.IrregularTables.Data;
+using EssentialPackages.UI.IrregularTables.Interfaces;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

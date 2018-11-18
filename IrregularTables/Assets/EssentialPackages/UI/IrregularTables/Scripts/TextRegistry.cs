@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Essential.Core.UI.Table.Interfaces;
+using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
 using TMPro;
 using UnityEngine;

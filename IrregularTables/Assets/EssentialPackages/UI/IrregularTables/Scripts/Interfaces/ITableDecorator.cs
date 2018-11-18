@@ -1,7 +1,6 @@
-﻿using EssentialPackages.UI.IrregularTables;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Essential.Core.UI.Table.Interfaces
+namespace EssentialPackages.UI.IrregularTables.Interfaces
 {
 	public interface ITableDecorator
 	{

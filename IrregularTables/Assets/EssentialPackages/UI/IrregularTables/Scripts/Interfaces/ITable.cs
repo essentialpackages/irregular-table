@@ -1,7 +1,7 @@
 ﻿using EssentialPackages.UI.IrregularTables.Data;
 using UnityEngine;
 
-namespace Essential.Core.UI.Table.Interfaces
+namespace EssentialPackages.UI.IrregularTables.Interfaces
 {
     public interface ITable
     {
