@@ -1,0 +1,12 @@
+{
+    "name": "_IrregularTablesTest",
+    "references": [
+        "_IrregularTables"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
