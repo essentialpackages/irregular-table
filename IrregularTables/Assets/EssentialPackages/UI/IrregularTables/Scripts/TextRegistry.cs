@@ -29,7 +29,7 @@ namespace EssentialPackages.UI.IrregularTables
 		public abstract void UpdateText(string id, string content);
 	}
 
-	public class TextMeshProTextRegistry : TextRegistry<ITextComponent>
+	public class TextAdapterRegistry : TextRegistry<ITextComponent>
 	{
 		public override void UpdateText(string id, string content)
 		{
