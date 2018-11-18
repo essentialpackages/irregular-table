@@ -2,7 +2,7 @@
 
 namespace EssentialPackages.UI.IrregularTables.TextRegistration
 {
-	public class TextAdapterRegistry : TextRegistry<ITextComponent>
+	public class TextAdapterRegistry : TextRegistryBase<ITextComponent>
 	{
 		public override void UpdateText(string id, string content)
 		{

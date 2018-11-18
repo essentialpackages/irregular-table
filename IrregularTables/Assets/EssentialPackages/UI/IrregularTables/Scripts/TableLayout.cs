@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
+using EssentialPackages.UI.IrregularTables.TextRegistration;
 using EssentialPackages.UI.TextAdapters.Interfaces;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace EssentialPackages.UI.IrregularTables
 		public TableLayout(ITable table)
 		{
 			Table = table;
-			TextRegistry = new TextRegistration.TextAdapterRegistry();
+			TextRegistry = new TextAdapterRegistry();
 		}
 	
 		public void ExpandTable(IEnumerable<TableCell> cells, Transform parent, int depth, Action<ICollection<string>, Transform, int> hasChildren)

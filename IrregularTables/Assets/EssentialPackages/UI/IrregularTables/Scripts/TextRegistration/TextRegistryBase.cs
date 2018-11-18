@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables.TextRegistration
 {
-	public abstract class TextRegistry<T> : ITextRegistry<T>
+	public abstract class TextRegistryBase<T> : ITextRegistry<T>
 	{
 		private readonly Dictionary<string, T> _textStore = new Dictionary<string, T>();
 
