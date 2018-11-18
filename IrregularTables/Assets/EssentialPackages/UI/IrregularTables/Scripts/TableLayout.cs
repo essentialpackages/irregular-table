@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Essential.Core.UI.Table.Interfaces;
 using EssentialPackages.UI.IrregularTables.Data;
-using TMPro;
+using EssentialPackages.UI.TextAdapters.Interfaces;
 using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables
@@ -10,7 +10,7 @@ namespace EssentialPackages.UI.IrregularTables
 	public class TableLayout
 	{
 		private ITable Table { get; }
-		private ITextRegistry<TMP_Text> TextRegistry { get; }
+		private ITextRegistry<ITextComponent> TextRegistry { get; }
 
 		public TableLayout(ITable table)
 		{
@@ -36,8 +36,8 @@ namespace EssentialPackages.UI.IrregularTables
 					{
 						foreach (var content in cell.Refs)
 						{
-							var text = Table.CreateItem(cell.Type, parent).GetComponent<TMP_Text>();
-							text.text = content;
+							var text = Table.CreateItem(cell.Type, parent).GetComponent<ITextComponent>();
+							text.Text = content;
 						}
 						break;
 					}
@@ -45,8 +45,8 @@ namespace EssentialPackages.UI.IrregularTables
 					{
 						foreach (var content in cell.Refs)
 						{
-							var text = Table.CreateItem(cell.Type, parent).GetComponent<TMP_Text>();
-							text.text = content;
+							var text = Table.CreateItem(cell.Type, parent).GetComponent<ITextComponent>();
+							text.Text = content;
 							TextRegistry.Register(cell.Id, text);
 						}
 						break;

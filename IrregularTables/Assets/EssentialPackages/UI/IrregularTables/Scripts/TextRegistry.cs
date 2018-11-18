@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Essential.Core.UI.Table.Interfaces;
+using EssentialPackages.UI.TextAdapters.Interfaces;
 using TMPro;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace EssentialPackages.UI.IrregularTables
 		public abstract void UpdateText(string id, string content);
 	}
 
-	public class TextMeshProTextRegistry : TextRegistry<TMP_Text>
+	public class TextMeshProTextRegistry : TextRegistry<ITextComponent>
 	{
 		public override void UpdateText(string id, string content)
 		{
@@ -39,7 +40,7 @@ namespace EssentialPackages.UI.IrregularTables
 				return;
 			}
 
-			text.text = content;
+			text.Text = content;
 		}
 	}
 }
