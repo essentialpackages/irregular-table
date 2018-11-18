@@ -1,7 +1,6 @@
 {
     "name": "_IrregularTables",
     "references": [
-        "Unity.TextMeshPro",
         "_TextAdapters"
     ],
     "optionalUnityReferences": [],

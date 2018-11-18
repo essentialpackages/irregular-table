@@ -2,7 +2,6 @@
 using System.Linq;
 using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
-using TMPro;
 using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables
