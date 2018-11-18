@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using EssentialPackages.UI.IrregularTables.Interfaces;
-using EssentialPackages.UI.TextAdapters.Interfaces;
 using UnityEngine;
 
-namespace EssentialPackages.UI.IrregularTables
+namespace EssentialPackages.UI.IrregularTables.TextRegistration
 {
 	public abstract class TextRegistry<T> : ITextRegistry<T>
 	{
@@ -27,19 +26,5 @@ namespace EssentialPackages.UI.IrregularTables
 		}
 
 		public abstract void UpdateText(string id, string content);
-	}
-
-	public class TextAdapterRegistry : TextRegistry<ITextComponent>
-	{
-		public override void UpdateText(string id, string content)
-		{
-			var text = FindText(id);
-			if (text == null)
-			{
-				return;
-			}
-
-			text.Text = content;
-		}
 	}
 }

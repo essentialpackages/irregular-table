@@ -15,7 +15,7 @@ namespace EssentialPackages.UI.IrregularTables
 		public TableLayout(ITable table)
 		{
 			Table = table;
-			TextRegistry = new TextAdapterRegistry();
+			TextRegistry = new TextRegistration.TextAdapterRegistry();
 		}
 	
 		public void ExpandTable(IEnumerable<TableCell> cells, Transform parent, int depth, Action<ICollection<string>, Transform, int> hasChildren)
