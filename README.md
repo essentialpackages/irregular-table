@@ -5,7 +5,7 @@
 
 ## Implementation Details
 
-![The image shows the benefit of using the adapter pattern for localization](https://github.com/essentialpackages/text-adapter/blob/master/resources/custom-adapter-pattern.png)
+(In progress)
 
 ## Import Details
 
