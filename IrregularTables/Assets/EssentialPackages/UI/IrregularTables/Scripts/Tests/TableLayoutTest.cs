@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
 using NUnit.Framework;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace EssentialPackages.UI.IrregularTables.Tests
 {
@@ -60,6 +62,24 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		public void TearDown()
 		{
 			//TargetScript = null;
+		}
+
+		[Test]
+		public void Constructor_Should_ThrowArgumentNullException_When_TableWasNull()
+		{
+			Assert.Throws<ArgumentNullException>(() => new TableLayout(null, new FakeRegistry()));
+		}
+		
+		[Test]
+		public void Constructor_Should_ThrowArgumentNullException_When_RegistryWasNull()
+		{
+			Assert.Throws<ArgumentNullException>(() => new TableLayout(new FakeTable(null), null));
+		}
+
+		[Test]
+		public void Constructor_Should_Succeed_When_AllParametersWereNotNull()
+		{
+			Assert.DoesNotThrow(() => CreateValidLayoutUsingFakeTable());
 		}
 
 		[Test]

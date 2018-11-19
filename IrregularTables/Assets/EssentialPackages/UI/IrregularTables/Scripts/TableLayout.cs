@@ -14,6 +14,16 @@ namespace EssentialPackages.UI.IrregularTables
 
 		public TableLayout(ITable table, ITextRegistry<ITextComponent> textRegistry)
 		{
+			if (table == null)
+			{
+				throw new ArgumentNullException(nameof(table));
+			}
+
+			if (textRegistry == null)
+			{
+				throw new ArgumentNullException(nameof(textRegistry));
+			}
+			
 			Table = table;
 			TextRegistry = textRegistry;
 		}
