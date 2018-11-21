@@ -1,25 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace EssentialPackages.UI.IrregularTables.Tests
 {
     public class TableDecoratorTest
     {
-        private GameObject DummyGameObject { get; set; }
-        private GameObject ChildGameObject { get; set; }
-        private TableDecorator TargetScript { get; set; }
+        private TableDecorator ScriptUnderTest { get; set; }
+        private GameObject GameObjectUnderTest { get; set; }
         private TableStyle TableStyle { get; set; }
-        private Image ImageComponent { get; set; }
 
-        private void AddChildrenToDummyGameObject()
+        private GameObject AddChildrenToDummyGameObject()
         {
-            ChildGameObject = new GameObject();
-            ChildGameObject.GetComponent<Transform>().parent = DummyGameObject.transform;
+            var child = new GameObject();
+            child.GetComponent<Transform>().parent = GameObjectUnderTest.transform;
+            return child;
         }
         
         [OneTimeSetUp]
@@ -39,42 +39,43 @@ namespace EssentialPackages.UI.IrregularTables.Tests
         public void SetUp()
         {
             var typeName = GetType().ToString();
-            DummyGameObject = new GameObject(typeName);
-            TargetScript = DummyGameObject.AddComponent<TableDecorator>();
+            GameObjectUnderTest = new GameObject(typeName);
+            ScriptUnderTest = GameObjectUnderTest.AddComponent<TableDecorator>();
         }
         
         [TearDown]
         public void TearDown()
         {
-            ImageComponent = null;
-            Object.Destroy(ChildGameObject);
-            
-            TargetScript = null;
-            Object.Destroy(DummyGameObject);
+            ScriptUnderTest = null;
+            Object.Destroy(GameObjectUnderTest);
         }
         
         [UnityTest]
-        public IEnumerator UpdateColors_Should_NotHaveAnyEffect_When_RootTransformWasNull()
+        public IEnumerator UpdateColors_Should_ThrowNullReferenceException_When_RootTransformWasNull()
         {
-            TargetScript.UpdateColors(null, TableStyle);
-            
-            Assert.Pass();
+            Assert.Throws<NullReferenceException>(() =>
+                {
+                    ScriptUnderTest.UpdateColors(null, TableStyle);
+                }
+            );
             yield return null;
         }
         
         [UnityTest]
-        public IEnumerator UpdateColors_Should_NotHaveAnyEffect_When_TableStyleWasNull()
+        public IEnumerator UpdateColors_Should_ThrowNullReferenceException_When_TableStyleWasNull()
         {
-            TargetScript.UpdateColors(DummyGameObject.transform, null);
-            
-            Assert.Pass();
+            Assert.Throws<NullReferenceException>(() =>
+                {
+                    ScriptUnderTest.UpdateColors(GameObjectUnderTest.transform, null);
+                }
+            );
             yield return null;
         }
 
         [UnityTest]
         public IEnumerator UpdateColors_Should_NotHaveAnyEffect_When_NoChildreCouldBeFound()
         {
-            TargetScript.UpdateColors(DummyGameObject.transform, TableStyle);
+            ScriptUnderTest.UpdateColors(GameObjectUnderTest.transform, TableStyle);
             
             Assert.Pass();
             yield return null;
@@ -84,7 +85,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
         public IEnumerator UpdateColors_Should_NotHaveAnyEffect_When_NoImagesWereAttachedToChildren()
         {
             AddChildrenToDummyGameObject();
-            TargetScript.UpdateColors(DummyGameObject.transform, TableStyle);
+            ScriptUnderTest.UpdateColors(GameObjectUnderTest.transform, TableStyle);
             
             Assert.Pass();
             yield return null;
@@ -93,14 +94,14 @@ namespace EssentialPackages.UI.IrregularTables.Tests
         [UnityTest]
         public IEnumerator UpdateColors_Should_ChangeImageColors_When_ImagesWereAttachedToChildren()
         {
-            AddChildrenToDummyGameObject();
-            ImageComponent = ChildGameObject.AddComponent<Image>();
-            ImageComponent.color = Color.gray;
+            var child = AddChildrenToDummyGameObject();
+            var image = child.AddComponent<Image>();
+            image.color = Color.gray;
             
-            TargetScript.UpdateColors(DummyGameObject.transform, TableStyle);
+            ScriptUnderTest.UpdateColors(GameObjectUnderTest.transform, TableStyle);
 
             var expected = TableStyle.Colors[0];
-            Assert.AreEqual(ImageComponent.color, expected);
+            Assert.AreEqual(image.color, expected);
             
             yield return null;
         }
