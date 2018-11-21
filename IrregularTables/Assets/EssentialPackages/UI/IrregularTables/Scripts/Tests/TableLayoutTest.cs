@@ -320,6 +320,24 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		}
 		
 		[Test]
+		public void ExpandTable_Should_ThrowArgumentOutOfRangeException_When_CreatingInvalidCell()
+		{
+			Assert.Throws<ArgumentOutOfRangeException>(() =>
+				{
+					var parent = new GameObject();
+					var tableLayout = CreateValidLayoutUsingFakeTable();
+
+					var cells = new List<TableCell>()
+					{
+						{ new TableCell() { Type = TableCellType.None } }
+					};
+
+					tableLayout.ExpandTable(cells, parent.transform, 0, (a, b, c) => {});
+				}
+			);
+		}
+		
+		[Test]
 		public void ExpandTable_Should_ThrowNullReferenceException_When_CellsWereNull()
 		{
 			Assert.Throws<NullReferenceException>(() =>
