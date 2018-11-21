@@ -12,6 +12,11 @@ namespace EssentialPackages.UI.IrregularTables
 		
 		public Table(ITableStyle style)
 		{
+			if (style == null)
+			{
+				throw new ArgumentNullException(nameof(style));
+			}
+			
 			Style = style;
 		}
 
