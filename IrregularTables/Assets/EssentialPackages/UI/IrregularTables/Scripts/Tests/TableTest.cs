@@ -79,15 +79,16 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			Assert.DoesNotThrow(() => CreateBrokenTable() );
 		}
 
-		/*public void CreateItem_Should_ThrowArgumentOutOfRangeException_When_CellTypeWasNull()
+		[Test]
+		public void CreateItem_Should_ThrowArgumentOutOfRangeException_When_CellTypeWasNone()
 		{
 			Assert.Throws<ArgumentOutOfRangeException>(() =>
 			{
 				var table = CreateValidTable();
 
-				table.CreateItem(null, DummyParent.transform);
+				table.CreateItem(TableCellType.None, DummyParent.transform);
 			});
-		}*/
+		}
 		
 		[Test]
 		public void CreateItem_Should_ThrowNullReferenceException_When_BrokenTableTriesToInstantiateEmptyCell()

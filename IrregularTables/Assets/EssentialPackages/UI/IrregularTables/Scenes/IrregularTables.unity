@@ -1718,21 +1718,21 @@ MonoBehaviour:
   _tableData:
     _body:
     - _id: 1
-      _type: 4
+      _type: 5
       _refs:
       - 2
       - 3
     - _id: 2
-      _type: 3
+      _type: 4
       _refs:
       - 3
       - 4
     - _id: 3
-      _type: 1
+      _type: 2
       _refs:
       - Hello
     - _id: 4
-      _type: 1
+      _type: 3
       _refs:
       - World
   _tableBody: {fileID: 998703267}
