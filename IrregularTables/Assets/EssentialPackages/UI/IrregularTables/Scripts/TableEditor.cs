@@ -60,7 +60,7 @@ namespace EssentialPackages.UI.IrregularTables
 
         protected Transform GetRootItem()
         {
-            return _tableBody.GetChild(0);
+            return (_tableBody.childCount == 0) ? null : _tableBody.GetChild(0);
         }
         
         protected TableCell GetRootData()

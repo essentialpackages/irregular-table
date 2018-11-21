@@ -12,20 +12,14 @@ using Object = UnityEngine.Object;
 namespace EssentialPackages.UI.IrregularTables.Tests
 {
 	public class TableEditorTest
-	{
-		private TableEditor ScriptUnderTest { get; set; }
-		private GameObject GameObjectUnderTest { get; set; }
-		
+	{		
 		private static readonly Type Type = typeof(TableEditor);
 		
 		private const BindingFlags Binding = BindingFlags.NonPublic | BindingFlags.Instance;
 		private readonly FieldInfo _tableData = Type.GetField("_tableData", Binding);
 		private readonly FieldInfo _tableBody = Type.GetField("_tableBody", Binding);
 		private readonly FieldInfo _style = Type.GetField("_style", Binding);
-		private MethodInfo _fillTable = Type.GetMethod("FillTable", Binding);
-		private MethodInfo _getRootItem = Type.GetMethod("GetRootItem", Binding);
-		private MethodInfo _getRootData = Type.GetMethod("GetRootData", Binding);
-		private MethodInfo _addItemData = Type.GetMethod("AddItemData", Binding);
+		private readonly MethodInfo _getRootItem = Type.GetMethod("GetRootItem", Binding);
 
 		private TableData CreateDummyTableData()
 		{
@@ -57,25 +51,6 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			gameObjectUnderTest.SetActive(true);
 
 			return scriptUnderTest;
-		}
-		
-		[OneTimeSetUp]
-		public void OneTimeSetUp()
-		{
-
-		}
-        
-		[SetUp]
-		public void SetUp()
-		{
-
-		}
-        
-		[TearDown]
-		public void TearDown()
-		{
-			ScriptUnderTest = null;
-			Object.Destroy(GameObjectUnderTest);
 		}
 		
 		[UnityTest]
@@ -131,22 +106,31 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			Assert.Pass();
 			yield return null; 
 		}
-
-		/*[UnityTest]
-		public IEnumerator GetRootItem_Should_ThrowNullReferenceException_When_RootTransformWasNull()
+		
+		[UnityTest]
+		public IEnumerator GetRootItem_Should_ReturnNull_When_TableBodyHasNoChildren()
 		{
+			var script = CreateFullyInitializedScript();
+			script.gameObject.SetActive(true);
 			
-		}*/
+			var result = _getRootItem.Invoke(script, null) as Transform;
 
-		/*[UnityTest]
-		public IEnumerator GetRootItem_Should_ThrowNullReferenceException_When_RootTransformWasNull()
+			Assert.IsNull(result);
+			yield return null; 
+		}
+		
+		[UnityTest]
+		public IEnumerator GetRootItem_Should_ReturnFirstChildTransform_When_TableBodyHasAtLeastOneChild()
 		{
-			Assert.Throws<NullReferenceException>(() =>
-				{
-					GetRootItem.Invoke(ScriptUnderTest, null);
-				}
-			);
-			yield return null;
-		}*/
+			var script = CreateFullyInitializedScript();
+			script.gameObject.SetActive(true);
+
+			new GameObject().transform.parent = _tableBody.GetValue(script) as Transform;
+			
+			var result = _getRootItem.Invoke(script, null) as Transform;
+
+			Assert.IsNotNull(result);
+			yield return null; 
+		}
 	}
 }
