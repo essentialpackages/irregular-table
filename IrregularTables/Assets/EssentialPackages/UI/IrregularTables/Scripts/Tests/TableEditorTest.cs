@@ -15,19 +15,23 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 	{
 		private TableEditor ScriptUnderTest { get; set; }
 		private GameObject GameObjectUnderTest { get; set; }
-		private Type Type { get; set; }
-
-		private BindingFlags BindingFlags { get; set; }
-		private MethodInfo FillTable { get; set; }
-		private MethodInfo GetRootItem { get; set; }
-		private MethodInfo GetRootData { get; set; }
-		private MethodInfo AddItemData { get; set; }
+		
+		private static readonly Type Type = typeof(TableEditor);
+		
+		private const BindingFlags Binding = BindingFlags.NonPublic | BindingFlags.Instance;
+		private readonly FieldInfo _tableData = Type.GetField("_tableData", Binding);
+		private readonly FieldInfo _tableBody = Type.GetField("_tableBody", Binding);
+		private readonly FieldInfo _style = Type.GetField("_style", Binding);
+		private MethodInfo _fillTable = Type.GetMethod("FillTable", Binding);
+		private MethodInfo _getRootItem = Type.GetMethod("GetRootItem", Binding);
+		private MethodInfo _getRootData = Type.GetMethod("GetRootData", Binding);
+		private MethodInfo _addItemData = Type.GetMethod("AddItemData", Binding);
 
 		private TableData CreateDummyTableData()
 		{
 			var tableData = new TableData();
 			var type = typeof(TableData);
-			var fieldInfo = type.GetField("_body", BindingFlags);
+			var fieldInfo = type.GetField("_body", Binding);
 			fieldInfo.SetValue(tableData, new List<TableCell>());
 			return tableData;
 		}
@@ -44,16 +48,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
-	
-			var fieldInfo = Type.GetField("_tableBody", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, new GameObject().transform);
-			
-			fieldInfo = Type.GetField("_style", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
-
 			var tableData = CreateDummyTableData();
-			fieldInfo = Type.GetField("_tableData", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, tableData);
+			
+			_tableData.SetValue(scriptUnderTest, tableData);
+			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
+			_style.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
 			
 			gameObjectUnderTest.SetActive(true);
 
@@ -63,14 +62,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
 		{
-			Type = typeof(TableEditor);
-			
-			BindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
-			
-			FillTable = Type.GetMethod(nameof(FillTable), BindingFlags);
-			GetRootItem = Type.GetMethod("GetRootItem", BindingFlags);
-			GetRootData = Type.GetMethod(nameof(GetRootData), BindingFlags);
-			AddItemData = Type.GetMethod(nameof(AddItemData), BindingFlags);
+
 		}
         
 		[SetUp]
@@ -105,8 +97,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
 	
-			var fieldInfo = Type.GetField("_tableBody", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, new GameObject().transform);
+			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
 			
 			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*_style"));
 			
@@ -120,12 +111,9 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
-	
-			var fieldInfo = Type.GetField("_tableBody", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, new GameObject().transform);
-			
-			fieldInfo = Type.GetField("_style", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
+
+			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
+			_style.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
 			
 			LogAssert.Expect(LogType.Exception, new Regex(@"NullReferenceException:"));
 			
