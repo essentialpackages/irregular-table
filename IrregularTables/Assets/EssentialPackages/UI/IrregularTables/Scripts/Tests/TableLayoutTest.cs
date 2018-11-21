@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
 using NUnit.Framework;
-using UnityEditor.VersionControl;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
 namespace EssentialPackages.UI.IrregularTables.Tests
 {
 	public class TableLayoutTest
 	{
-		//private TableLayout TargetScript { get; set; }
-		//private ICollection<TableCell> Cells { get; set; }
-
 		private class FakeTable : ITable
 		{
 			private GameObject Prefab { get; }
@@ -71,21 +65,6 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var go = new GameObject();
 			go.AddComponent<FakeScript>();
 			ValidTable = new FakeTable(go);
-		}
-
-		[SetUp]
-		public void SetUp()
-		{
-			
-			var cell = new TableCell();
-			//Cells = new List<TableCell>(){};
-			//TargetScript = new TableLayout(new FakeTable(null), new FakeRegistry());
-		}
-        
-		[TearDown]
-		public void TearDown()
-		{
-			//TargetScript = null;
 		}
 
 		[Test]
