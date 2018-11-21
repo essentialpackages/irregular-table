@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.IrregularTables.TextRegistration;
@@ -19,15 +20,30 @@ namespace EssentialPackages.UI.IrregularTables
 
         protected void Awake()
         {
-            var table = new Table(_style);
-            var textRegistry = new TextAdapterRegistry();
-            TableLayout = new TableLayout(table, textRegistry);
-            Decorator = GetComponent<ITableDecorator>();
+            Initialize();
 
             Debug.Log(JsonUtility.ToJson(_tableData));
            
             FillTable(new[] {"1"}, _tableBody, 0);
             Decorator?.UpdateColors(GetRootItem(), _style);
+        }
+
+        private void Initialize()
+        {
+            if (_tableBody == null)
+            {
+                throw new ArgumentNullException(nameof(_tableBody));
+            }
+            
+            if (_style == null)
+            {
+                throw new ArgumentNullException(nameof(_style));
+            }
+            
+            var table = new Table(_style);
+            var textRegistry = new TextAdapterRegistry();
+            TableLayout = new TableLayout(table, textRegistry);
+            Decorator = GetComponent<ITableDecorator>();
         }
 
         protected void FillTable(ICollection<string> refs, Transform parent, int depth)
