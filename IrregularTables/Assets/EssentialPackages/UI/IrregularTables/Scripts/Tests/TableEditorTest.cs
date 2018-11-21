@@ -39,6 +39,26 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			go.SetActive(false);
 			return go;
 		}
+
+		private TableEditor CreateFullyInitializedScript()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
+	
+			var fieldInfo = Type.GetField("_tableBody", BindingFlags);
+			fieldInfo.SetValue(scriptUnderTest, new GameObject().transform);
+			
+			fieldInfo = Type.GetField("_style", BindingFlags);
+			fieldInfo.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
+
+			var tableData = CreateDummyTableData();
+			fieldInfo = Type.GetField("_tableData", BindingFlags);
+			fieldInfo.SetValue(scriptUnderTest, tableData);
+			
+			gameObjectUnderTest.SetActive(true);
+
+			return scriptUnderTest;
+		}
 		
 		[OneTimeSetUp]
 		public void OneTimeSetUp()
@@ -56,19 +76,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		[SetUp]
 		public void SetUp()
 		{
-			/*var typeName = GetType().ToString();
-			GameObjectUnderTest = new GameObject(typeName);
-			ScriptUnderTest = GameObjectUnderTest.AddComponent<TableEditor>();
 
-			var tableData = CreateDummyTableData();
-			
-			const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
-			var fieldInfo = Type.GetField("_tableData", bindingFlags);
-			fieldInfo.SetValue(ScriptUnderTest, tableData);
-			fieldInfo = Type.GetField("_tableBody", bindingFlags);
-			fieldInfo.SetValue(ScriptUnderTest, new GameObject().transform);
-			fieldInfo = Type.GetField("_style", bindingFlags);
-			fieldInfo.SetValue(ScriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());*/
 		}
         
 		[TearDown]
@@ -82,7 +90,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		public IEnumerator Awake_ThrowArgumentNullException_When_TableBodyWasNull()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
-			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
+			gameObjectUnderTest.AddComponent<TableEditor>();
 			
 			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*_tableBody"));
 			
@@ -105,10 +113,6 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			gameObjectUnderTest.SetActive(true);
 			
 			yield return null;
-			
-			//var tableData = CreateDummyTableData();
-			//var fieldInfo = Type.GetField("_tableData", bindingFlags);
-			//fieldInfo.SetValue(ScriptUnderTest, tableData);
 		}
 
 		[UnityTest]
@@ -133,22 +137,8 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		[UnityTest]
 		public IEnumerator Awake_Should_Succeed_When_AllFieldsWereInitialized()
 		{
-			var gameObjectUnderTest = CreateInactiveGameObject();
-			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
-	
-			var fieldInfo = Type.GetField("_tableBody", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, new GameObject().transform);
-			
-			fieldInfo = Type.GetField("_style", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
-
-			var tableData = new TableData();
-			fieldInfo = Type.GetField("_tableData", BindingFlags);
-			fieldInfo.SetValue(scriptUnderTest, tableData);
-			fieldInfo = typeof(TableData).GetField("_body", BindingFlags);
-			fieldInfo.SetValue(tableData, new List<TableCell>());
-			
-			gameObjectUnderTest.SetActive(true);
+			var script = CreateFullyInitializedScript();
+			script.gameObject.SetActive(true);
 			
 			Assert.Pass();
 			yield return null; 
