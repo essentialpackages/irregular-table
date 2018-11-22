@@ -15,9 +15,10 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private static readonly Type Type = typeof(CustomTableEditor);
 		
 		private const BindingFlags Binding = BindingFlags.NonPublic | BindingFlags.Instance;
-		private readonly FieldInfo _tableData = Type.BaseType.GetField("_tableData", Binding);
-		private readonly FieldInfo _tableBody = Type.BaseType.GetField("_tableBody", Binding);
-		private readonly FieldInfo _style = Type.BaseType.GetField("_style", Binding);
+		private readonly FieldInfo _tableData = typeof(TableProperties).GetField("_tableData", Binding);
+		private readonly FieldInfo _tableBody = typeof(TableProperties).GetField("_tableBody", Binding);
+		private readonly FieldInfo _style = typeof(TableProperties).GetField("_style", Binding);
+		private readonly FieldInfo _properties = Type.BaseType.GetField("_properties", Binding);
 		private readonly MethodInfo _createCustomRow = Type.GetMethod("CreateCustomRow", Binding);
 		
 		private class FakeTableStyle : ITableStyle
@@ -57,6 +58,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private CustomTableEditor CreateFullyInitializedScript()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
+			gameObjectUnderTest.SetActive(false);
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
 			var tableData = CreateDummyTableData();
 			var tableStyle = ScriptableObject.CreateInstance<TableStyle>();
@@ -73,12 +75,14 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			
 			Debug.Log("1: " + _tableData +" 2: " + _tableBody + " 3: " + _style);
 			
-			_tableData.SetValue(scriptUnderTest, tableData);
-			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
+			var props = new TableProperties();
+			Debug.Log(scriptUnderTest+" -->"+_properties);
+			_properties.SetValue(scriptUnderTest, props);
+			_tableData.SetValue(props, tableData);
+			_tableBody.SetValue(props, new GameObject().transform);
+			_style.SetValue(props, tableStyle);
 			
-			_style.SetValue(scriptUnderTest, tableStyle);
 			
-			gameObjectUnderTest.SetActive(true);
 
 			return scriptUnderTest;
 		}
@@ -88,6 +92,9 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		{
 			var scriptUnderTest = CreateFullyInitializedScript();
 
+			// TODO fail because CreateCustomRow is called in Awake function
+			
+			scriptUnderTest.gameObject.SetActive(true);
 			//_createCustomRow.Invoke(scriptUnderTest, new object[] { "param1", "param1", "param1", "param1", "param1"});
 			
 			Assert.Pass();
