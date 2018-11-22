@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using EssentialPackages.UI.IrregularTables.Interfaces;
+using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables.Data
 {
@@ -8,8 +9,8 @@ namespace EssentialPackages.UI.IrregularTables.Data
 		[SerializeField] private Transform _tableBody;
 		[SerializeField] private TableStyle _style; 
 
-		public TableData TableData => _tableData;
+		public ITableData TableData => _tableData;
 		public Transform Transform => _tableBody;
-		public TableStyle TableStyle => _style;
+		public ITableStyle TableStyle => _style;
 	}
 }

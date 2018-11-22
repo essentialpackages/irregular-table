@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EssentialPackages.UI.IrregularTables.Interfaces;
 using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables.Data
 {
     [Serializable]
-    public class TableData
+    public class TableData : ITableData
     {
         [SerializeField] private List<TableCell> _body;
         
