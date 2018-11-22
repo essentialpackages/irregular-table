@@ -31,13 +31,13 @@ namespace EssentialPackages.UI.IrregularTables
             var body = _properties.TableBody;
             if (body == null)
             {
-                throw new ArgumentNullException(nameof(body));
+                throw new ArgumentNullException("TableBody");
             }
 
             var style = _properties.TableStyle;
             if (style == null)
             {
-                throw new ArgumentNullException(nameof(style));
+                throw new ArgumentNullException("TableStyle");
             }
             
             var table = new Table(style);

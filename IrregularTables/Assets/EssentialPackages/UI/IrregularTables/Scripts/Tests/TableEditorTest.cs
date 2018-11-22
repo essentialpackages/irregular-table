@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using EssentialPackages.UI.IrregularTables.Data;
+using EssentialPackages.UI.IrregularTables.Interfaces;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -16,9 +17,10 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private static readonly Type Type = typeof(TableEditor);
 		
 		private const BindingFlags Binding = BindingFlags.NonPublic | BindingFlags.Instance;
-		private readonly FieldInfo _tableData = Type.GetField("_tableData", Binding);
-		private readonly FieldInfo _tableBody = Type.GetField("_tableBody", Binding);
-		private readonly FieldInfo _style = Type.GetField("_style", Binding);
+		private readonly FieldInfo _tableData = typeof(TableProperties).GetField("_tableData", Binding);
+		private readonly FieldInfo _tableBody = typeof(TableProperties).GetField("_tableBody", Binding);
+		private readonly FieldInfo _style = typeof(TableProperties).GetField("_style", Binding);
+		private readonly FieldInfo _properties = Type.GetField("_properties", Binding);
 		private readonly MethodInfo _getRootItem = Type.GetMethod("GetRootItem", Binding);
 
 		private TableData CreateDummyTableData()
@@ -43,10 +45,13 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
 			var tableData = CreateDummyTableData();
+
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableData.SetValue(props, tableData);
+			_tableBody.SetValue(props, new GameObject().transform);
+			_style.SetValue(props, ScriptableObject.CreateInstance<TableStyle>());
 			
-			_tableData.SetValue(scriptUnderTest, tableData);
-			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
-			_style.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
 			
 			gameObjectUnderTest.SetActive(true);
 
@@ -57,9 +62,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		public IEnumerator Awake_ThrowArgumentNullException_When_TableBodyWasNull()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
-			gameObjectUnderTest.AddComponent<TableEditor>();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
 			
-			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*_tableBody"));
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*TableBody"));
 			
 			gameObjectUnderTest.SetActive(true);
 			
@@ -72,9 +79,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
 	
-			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableBody.SetValue(props, new GameObject().transform);
 			
-			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*_style"));
+			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*TableStyle"));
 			
 			gameObjectUnderTest.SetActive(true);
 			
@@ -87,8 +96,10 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
 
-			_tableBody.SetValue(scriptUnderTest, new GameObject().transform);
-			_style.SetValue(scriptUnderTest, ScriptableObject.CreateInstance<TableStyle>());
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableBody.SetValue(props, new GameObject().transform);
+			_style.SetValue(props, ScriptableObject.CreateInstance<TableStyle>());
 			
 			LogAssert.Expect(LogType.Exception, new Regex(@"NullReferenceException:"));
 			
@@ -122,12 +133,24 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		[UnityTest]
 		public IEnumerator GetRootItem_Should_ReturnFirstChildTransform_When_TableBodyHasAtLeastOneChild()
 		{
-			var script = CreateFullyInitializedScript();
-			script.gameObject.SetActive(true);
+			/*var script = CreateFullyInitializedScript();
+			script.gameObject.SetActive(true);*/
+			var gameObjectUnderTest = CreateInactiveGameObject();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
+			var tableData = CreateDummyTableData();
 
-			new GameObject().transform.parent = _tableBody.GetValue(script) as Transform;
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableData.SetValue(props, tableData);
+			_tableBody.SetValue(props, new GameObject().transform);
+			_style.SetValue(props, ScriptableObject.CreateInstance<TableStyle>());
 			
-			var result = _getRootItem.Invoke(script, null) as Transform;
+			
+			gameObjectUnderTest.SetActive(true);
+
+			new GameObject().transform.parent = _tableBody.GetValue(props) as Transform;
+			
+			var result = _getRootItem.Invoke(scriptUnderTest, null) as Transform;
 
 			Assert.IsNotNull(result);
 			yield return null; 

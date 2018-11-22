@@ -5,7 +5,7 @@ using UnityEngine;
 namespace EssentialPackages.UI.IrregularTables.Data
 {
 	[Serializable]
-	public class TableProperties
+	public class TableProperties : ITableProperties
 	{
 		[SerializeField] private TableData _tableData;
 		[SerializeField] private Transform _tableBody;
