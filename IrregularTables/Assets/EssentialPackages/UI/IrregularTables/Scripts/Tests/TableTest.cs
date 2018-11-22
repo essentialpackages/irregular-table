@@ -19,6 +19,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			public GameObject Text { get; }
 			public GameObject Row { get; }
 			public GameObject Column { get; }
+			public Color[] Colors => null;
 
 			public FakeTableStyle(GameObject prefab)
 			{

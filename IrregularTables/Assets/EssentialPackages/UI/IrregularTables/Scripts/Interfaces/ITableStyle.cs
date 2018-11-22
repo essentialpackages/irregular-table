@@ -8,5 +8,6 @@ namespace EssentialPackages.UI.IrregularTables.Interfaces
 		GameObject Text { get; }
 		GameObject Row { get; }
 		GameObject Column { get; }
+		Color[] Colors { get; }
 	}
 }

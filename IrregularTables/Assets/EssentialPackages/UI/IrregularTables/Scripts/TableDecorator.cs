@@ -6,7 +6,7 @@ namespace EssentialPackages.UI.IrregularTables
 {
     public class TableDecorator : MonoBehaviour, ITableDecorator
     {
-        public void UpdateColors(Transform rootElement, TableStyle style)
+        public void UpdateColors(Transform rootElement, ITableStyle style)
         {
             var counter = 0;
             var colors = style.Colors;
