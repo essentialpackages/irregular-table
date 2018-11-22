@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables.Data
 {
-	public class TableConfiguration : MonoBehaviour
+	public class TableProperties : MonoBehaviour
 	{
 		[SerializeField] private TableData _tableData;
 		[SerializeField] private Transform _tableBody;
