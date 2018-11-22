@@ -11,9 +11,7 @@ namespace EssentialPackages.UI.IrregularTables
     {
         private const int MaxDepth = 10;
 
-        [SerializeField] private TableData _tableData;
-        [SerializeField] private Transform _tableBody;
-        [SerializeField] private TableStyle _style;
+        [SerializeField] private TableProperties _properties;
 
         private ITableDecorator Decorator { get; set; }
         private TableLayout TableLayout { get; set; }
@@ -22,25 +20,27 @@ namespace EssentialPackages.UI.IrregularTables
         {
             Initialize();
 
-            Debug.Log(JsonUtility.ToJson(_tableData));
+            Debug.Log(JsonUtility.ToJson(_properties.TableData));
            
-            FillTable(new[] {"1"}, _tableBody, 0);
-            Decorator?.UpdateColors(GetRootItem(), _style);
+            FillTable(new[] {"1"}, _properties.TableBody, 0);
+            //Decorator?.UpdateColors(GetRootItem(), _properties.TableStyle);
         }
 
         private void Initialize()
         {
-            if (_tableBody == null)
+            var body = _properties.TableBody;
+            if (body == null)
             {
-                throw new ArgumentNullException(nameof(_tableBody));
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            var style = _properties.TableStyle;
+            if (style == null)
+            {
+                throw new ArgumentNullException(nameof(style));
             }
             
-            if (_style == null)
-            {
-                throw new ArgumentNullException(nameof(_style));
-            }
-            
-            var table = new Table(_style);
+            var table = new Table(style);
             var textRegistry = new TextAdapterRegistry();
             TableLayout = new TableLayout(table, textRegistry);
             Decorator = GetComponent<ITableDecorator>();
@@ -54,23 +54,23 @@ namespace EssentialPackages.UI.IrregularTables
                 return;
             }
 
-            var cells = _tableData.FindCells(refs);
+            var cells = _properties.TableData.FindCells(refs);
             TableLayout.ExpandTable(cells, parent, depth + 1, FillTable);
         }
 
         protected Transform GetRootItem()
         {
-            return (_tableBody.childCount == 0) ? null : _tableBody.GetChild(0);
+            return (_properties.TableBody.childCount == 0) ? null : _properties.TableBody.GetChild(0);
         }
         
         protected TableCell GetRootData()
         {
-            return _tableData.GetRootCell();
+            return _properties.TableData.GetRootCell();
         }
 
         protected void AddItemData(string id, TableCellType type, ICollection<string> refs)
         {
-            _tableData.AddCell(id, type, refs);
+            _properties.TableData.AddCell(id, type, refs);
         }
     }
 }
