@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
+using EssentialPackages.UI.TextAdapters.Interfaces;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -37,6 +38,12 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 				Column = prefab;
 			}
 		}
+
+		private class FakeScript : MonoBehaviour, ITextComponent
+		{
+			public string Id { get; set; }
+			public string Text { get; set; }
+		}
 		
 		private TableData CreateDummyTableData()
 		{
@@ -62,6 +69,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
 			var tableData = CreateDummyTableData();
 			var tableStyle = ScriptableObject.CreateInstance<TableStyle>();
+
+			var fieldInfo = typeof(TableStyle).GetField("_rowElement", Binding);
+			fieldInfo.SetValue(tableStyle, new GameObject());
+			fieldInfo = typeof(TableStyle).GetField("_textElement", Binding);
+			fieldInfo.SetValue(tableStyle, new GameObject("", typeof (FakeScript)));
 			
 			// This is another good example for my tutorial about good & bad code design!
 			// I would like to work with a FakeTableStyle implementing ITableStyle, like in TableTest.cs
@@ -77,10 +89,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			
 			var props = new TableProperties();
 			Debug.Log(scriptUnderTest+" -->"+_properties);
-			_properties.SetValue(scriptUnderTest, props);
 			_tableData.SetValue(props, tableData);
 			_tableBody.SetValue(props, new GameObject().transform);
 			_style.SetValue(props, tableStyle);
+			_properties.SetValue(scriptUnderTest, props);
+			
 			
 			
 
