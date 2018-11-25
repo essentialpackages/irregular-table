@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657886, g: 0.4964127, b: 0.57481724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1436,42 +1436,42 @@ Prefab:
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 224867418010000882, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 224455613412804644, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 224867418010000882, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
@@ -1481,47 +1481,47 @@ Prefab:
     - target: {fileID: 224455613412804644, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224967524514738600, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224967524514738600, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224419337931651810, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39406869c5e6cd4bb82d78f8baad426, type: 2}
@@ -1717,7 +1717,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1472851154}
   - component: {fileID: 1472851156}
-  - component: {fileID: 1472851155}
   m_Layer: 0
   m_Name: IrregularTable
   m_TagString: Untagged
@@ -1738,17 +1737,6 @@ Transform:
   m_Father: {fileID: 1851567232}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1472851155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1472851153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565df91d8459cbe48a6b729130e2d507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1472851156
 MonoBehaviour:
   m_ObjectHideFlags: 0
