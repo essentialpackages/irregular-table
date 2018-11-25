@@ -59,7 +59,22 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		}
 		
 		[UnityTest]
-		public IEnumerator Awake_ThrowArgumentNullException_When_TableBodyWasNull()
+		public IEnumerator Awake_Should_ThrowNullReferenceException_When_PropertiesNotSet()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
+			_properties.SetValue(scriptUnderTest, null);
+
+			scriptUnderTest.gameObject.SetActive(true);
+
+			LogAssert.Expect(LogType.Exception, new Regex(@"NullReferenceException:"));
+			
+			yield return null;
+		}
+		
+		[UnityTest]
+		public IEnumerator Awake_Should_ThrowArgumentNullException_When_TableBodyWasNull()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
@@ -74,7 +89,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		}
 		
 		[UnityTest]
-		public IEnumerator Awake_ThrowArgumentNullException_When_StyleWasNull()
+		public IEnumerator Awake_Should_ThrowArgumentNullException_When_StyleWasNull()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<TableEditor>();
