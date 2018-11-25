@@ -13,13 +13,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 {
 	public class CustomTableEditorTest
 	{
-		private static readonly Type Type = typeof(CustomTableEditor);
-		
 		private const BindingFlags Binding = BindingFlags.NonPublic | BindingFlags.Instance;
 		private readonly FieldInfo _tableData = typeof(TableProperties).GetField("_tableData", Binding);
 		private readonly FieldInfo _tableBody = typeof(TableProperties).GetField("_tableBody", Binding);
 		private readonly FieldInfo _style = typeof(TableProperties).GetField("_style", Binding);
-		private readonly FieldInfo _properties = Type.BaseType.GetField("_properties", Binding);
+		private readonly FieldInfo _properties = typeof(TableEditor).GetField("_properties", Binding);
 		private readonly FieldInfo _rowElement = typeof(TableStyle).GetField("_rowElement", Binding);
 		private readonly FieldInfo _textElement = typeof(TableStyle).GetField("_textElement", Binding);
 		private readonly FieldInfo _body = typeof(TableData).GetField("_body", Binding);
