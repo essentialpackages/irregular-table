@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using EssentialPackages.UI.IrregularTables.Data;
@@ -158,13 +159,33 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		}
 
 		[UnityTest]
-		public IEnumerator Awake_Should_AddSingleRow_When_AllFieldsWereInitialized()
+		public IEnumerator Awake_Should_Succeed_When_AllFieldsWereInitialized()
 		{
 			var scriptUnderTest = CreateFullyInitializedScript();
 
 			scriptUnderTest.gameObject.SetActive(true);
 			
 			Assert.Pass();
+			yield return null;
+		}
+		
+		[UnityTest]
+		public IEnumerator CreateCustomRow_Should_AddFourElementsToTable_When_EmptyStringsWerePassed()
+		{
+			var scriptUnderTest = CreateFullyInitializedScript();
+
+			scriptUnderTest.gameObject.SetActive(true);
+			
+			var propertyObject = _properties.GetValue(scriptUnderTest);
+			var tableData = _tableData.GetValue(propertyObject);
+			var cells = _body.GetValue(tableData) as List<TableCell>;
+	
+			var last = cells.Count;
+			
+			scriptUnderTest.CreateCustomRow("", "", "", "", "");
+			
+			Assert.AreEqual(last + 4, cells.Count);
+			
 			yield return null;
 		}
 	}
