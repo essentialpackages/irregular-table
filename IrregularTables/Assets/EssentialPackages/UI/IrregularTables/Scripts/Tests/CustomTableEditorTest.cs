@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using EssentialPackages.UI.IrregularTables.Data;
 using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
@@ -89,6 +90,71 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			_properties.SetValue(scriptUnderTest, props);
 
 			return scriptUnderTest;
+		}
+		
+		[UnityTest]
+		public IEnumerator Awake_Should_ThrowNullReferenceException_When_PropertiesNotSet()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
+			_properties.SetValue(scriptUnderTest, null);
+
+			scriptUnderTest.gameObject.SetActive(true);
+
+			LogAssert.Expect(LogType.Exception, new Regex(@"NullReferenceException:"));
+			
+			yield return null;
+		}
+		
+		[UnityTest]
+		public IEnumerator Awake_Should_ThrowArgumentNullException_When_TableBodyWasNull()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
+			
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*TableBody"));
+			
+			gameObjectUnderTest.SetActive(true);
+			
+			yield return null;
+		}
+		
+		[UnityTest]
+		public IEnumerator Awake_Should_ThrowArgumentNullException_When_StyleWasNull()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
+	
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableBody.SetValue(props, new GameObject().transform);
+			
+			LogAssert.Expect(LogType.Exception, new Regex(@"ArgumentNullException:.*[\s\S].*TableStyle"));
+			
+			gameObjectUnderTest.SetActive(true);
+			
+			yield return null;
+		}
+
+		[UnityTest]
+		public IEnumerator Awake_Should_ThrowNullReferenceException_When_TableDataWasNull()
+		{
+			var gameObjectUnderTest = CreateInactiveGameObject();
+			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
+
+			var props = new TableProperties();
+			_properties.SetValue(scriptUnderTest, props);
+			_tableBody.SetValue(props, new GameObject().transform);
+			_style.SetValue(props, ScriptableObject.CreateInstance<TableStyle>());
+			
+			LogAssert.Expect(LogType.Exception, new Regex(@"NullReferenceException:"));
+			
+			gameObjectUnderTest.SetActive(true);
+			
+			yield return null; 
 		}
 
 		[UnityTest]
