@@ -22,9 +22,9 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		}
 		
 		[Test]
-		public void AddCell_Should_ThrowNullReferenceException_When_PassingNullAsReferences()
+		public void AddCell_Should_ThrowArgumentNullException_When_PassingNullAsReferences()
 		{
-			Assert.Throws<NullReferenceException>(() =>
+			Assert.Throws<ArgumentNullException>(() =>
 			{
 				var tableData = new TableData();
 				_cells.SetValue(tableData, new List<TableCell>());
@@ -40,9 +40,9 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			_cells.SetValue(tableData, new List<TableCell>());
 			
 			tableData.AddCell("", TableCellType.None, new string[0]);
-			
-			var actual = _cells.GetValue(tableData);
-			Assert.AreEqual(1, actual);
+
+			var actual = _cells.GetValue(tableData) as List<TableCell>;
+			Assert.AreEqual(1, actual.Count);
 		}
 		
 		[Test]
@@ -53,8 +53,8 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			
 			tableData.AddCell("", TableCellType.None, new string[0]);
 			
-			var actual = _cells.GetValue(tableData);
-			Assert.AreEqual(1, actual);
+			var actual = _cells.GetValue(tableData) as List<TableCell>;
+			Assert.AreEqual(1, actual.Count);
 		}
 	}
 }
