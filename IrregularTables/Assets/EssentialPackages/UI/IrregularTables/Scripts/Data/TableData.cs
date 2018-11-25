@@ -33,7 +33,10 @@ namespace EssentialPackages.UI.IrregularTables.Data
         
         public IEnumerable<TableCell> FindCells(ICollection<string> ids)
         {
-            return ids.Count == 0 ? null : _body.Where(element => ids.Contains(element.Id));
+            var customOrder = ids.ToList();
+            return ids.Count == 0 ? null :
+                _body.Where(element => ids.Contains(element.Id))
+                    .OrderBy(element => customOrder.IndexOf(element.Id));
         }
     }
 }
