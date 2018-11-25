@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using EssentialPackages.UI.IrregularTables.Data;
-using EssentialPackages.UI.IrregularTables.Interfaces;
 using EssentialPackages.UI.TextAdapters.Interfaces;
 using NUnit.Framework;
 using UnityEngine;
@@ -22,12 +20,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private readonly FieldInfo _tableBody = typeof(TableProperties).GetField("_tableBody", Binding);
 		private readonly FieldInfo _style = typeof(TableProperties).GetField("_style", Binding);
 		private readonly FieldInfo _properties = Type.BaseType.GetField("_properties", Binding);
-		private readonly MethodInfo _createCustomRow = Type.GetMethod("CreateCustomRow", Binding);
 		private readonly FieldInfo _rowElement = typeof(TableStyle).GetField("_rowElement", Binding);
 		private readonly FieldInfo _textElement = typeof(TableStyle).GetField("_textElement", Binding);
 		private readonly FieldInfo _body = typeof(TableData).GetField("_body", Binding);
 
-		private GameObject CreateEmptyGameObject()
+		private static GameObject CreateEmptyGameObject()
 		{
 			return new GameObject();
 		}
