@@ -21,22 +21,24 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private readonly FieldInfo _style = typeof(TableProperties).GetField("_style", Binding);
 		private readonly FieldInfo _properties = Type.BaseType.GetField("_properties", Binding);
 		private readonly MethodInfo _createCustomRow = Type.GetMethod("CreateCustomRow", Binding);
-		
-		private class FakeTableStyle : ITableStyle
-		{
-			public GameObject Empty { get; }
-			public GameObject Text { get; }
-			public GameObject Row { get; }
-			public GameObject Column { get; }
-			public Color[] Colors => null;
+		private readonly FieldInfo _rowElement = typeof(TableStyle).GetField("_rowElement", Binding);
+		private readonly FieldInfo _textElement = typeof(TableStyle).GetField("_textElement", Binding);
+		private readonly FieldInfo _body = typeof(TableData).GetField("_body", Binding);
 
-			public FakeTableStyle(GameObject prefab)
-			{
-				Empty = prefab;
-				Text = prefab;
-				Row = prefab;
-				Column = prefab;
-			}
+		private GameObject CreateEmptyGameObject()
+		{
+			return new GameObject();
+		}
+		
+		private TableStyle CreateFakeTableStyle()
+		{
+			var tableStyle = ScriptableObject.CreateInstance<TableStyle>();
+			var go = CreateEmptyGameObject();
+			
+			_rowElement.SetValue(tableStyle, go);
+			_textElement.SetValue(tableStyle, new GameObject("", typeof (FakeScript)));
+			
+			return tableStyle;
 		}
 
 		private class FakeScript : MonoBehaviour, ITextComponent
@@ -48,9 +50,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private TableData CreateDummyTableData()
 		{
 			var tableData = new TableData();
-			var type = typeof(TableData);
-			var fieldInfo = type.GetField("_body", Binding);
-			fieldInfo.SetValue(tableData, new List<TableCell>());
+			_body.SetValue(tableData, new List<TableCell>());
 			return tableData;
 		}
 
@@ -65,15 +65,11 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 		private CustomTableEditor CreateFullyInitializedScript()
 		{
 			var gameObjectUnderTest = CreateInactiveGameObject();
-			gameObjectUnderTest.SetActive(false);
+
 			var scriptUnderTest = gameObjectUnderTest.AddComponent<CustomTableEditor>();
 			var tableData = CreateDummyTableData();
-			var tableStyle = ScriptableObject.CreateInstance<TableStyle>();
 
-			var fieldInfo = typeof(TableStyle).GetField("_rowElement", Binding);
-			fieldInfo.SetValue(tableStyle, new GameObject());
-			fieldInfo = typeof(TableStyle).GetField("_textElement", Binding);
-			fieldInfo.SetValue(tableStyle, new GameObject("", typeof (FakeScript)));
+			var tableStyle = CreateFakeTableStyle();
 			
 			// This is another good example for my tutorial about good & bad code design!
 			// I would like to work with a FakeTableStyle implementing ITableStyle, like in TableTest.cs
@@ -84,31 +80,23 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 			// All serialized fields could be outsourced to an Data-only MonoBehaviour. It could implement an
 			// interface and all its getter function could also return interfaces.
 			// I will evaluate this hypothesis in the next few days!
-			
-			Debug.Log("1: " + _tableData +" 2: " + _tableBody + " 3: " + _style);
+			var go = CreateEmptyGameObject();
 			
 			var props = new TableProperties();
-			Debug.Log(scriptUnderTest+" -->"+_properties);
 			_tableData.SetValue(props, tableData);
-			_tableBody.SetValue(props, new GameObject().transform);
+			_tableBody.SetValue(props, go.transform);
 			_style.SetValue(props, tableStyle);
 			_properties.SetValue(scriptUnderTest, props);
-			
-			
-			
 
 			return scriptUnderTest;
 		}
 
 		[UnityTest]
-		public IEnumerator CreateCustomRow_Should_ExpandTable_When_missing()
+		public IEnumerator Awake_Should_AddSingleRow_When_AllFieldsWereInitialized()
 		{
 			var scriptUnderTest = CreateFullyInitializedScript();
 
-			// TODO fail because CreateCustomRow is called in Awake function
-			
 			scriptUnderTest.gameObject.SetActive(true);
-			//_createCustomRow.Invoke(scriptUnderTest, new object[] { "param1", "param1", "param1", "param1", "param1"});
 			
 			Assert.Pass();
 			yield return null;
