@@ -4,6 +4,8 @@ namespace EssentialPackages.UI.IrregularTables
 {
 	public class CustomTableEditor : TableEditor
 	{
+		private static int _id = 0;
+		
 		protected new void Awake()
 		{
 			base.Awake();
@@ -13,15 +15,20 @@ namespace EssentialPackages.UI.IrregularTables
 		
 		public void CreateCustomRow(string playerNo, string controls, string defaultText, string lives, string description)
 		{
-			AddItemData("---1", TableCellType.StaticText, new []{playerNo, controls});
-			AddItemData("---2", TableCellType.DynamicText, new []{defaultText});
-			AddItemData("---3", TableCellType.StaticText, new []{lives, description});
-			AddItemData("---4", TableCellType.Row, new []{"---1", "---2", "---3"});
+			var firstUuid = _id++.ToString();
+			var secondUuid = _id++.ToString();
+			var thirdUuid = _id++.ToString();
+			AddItemData(firstUuid, TableCellType.StaticText, new []{playerNo, controls});
+			AddItemData(secondUuid, TableCellType.DynamicText, new []{defaultText});
+			AddItemData(thirdUuid, TableCellType.StaticText, new []{lives, description});
+
+			var id = _id++.ToString();
+			AddItemData(id, TableCellType.Row, new []{firstUuid, secondUuid, thirdUuid});
 			
-			GetRootData()?.Refs.Add("---4");
+			GetRootData()?.Refs.Add(id);
 
 			var parent = GetRootItem();
-			FillTable(new[]{"---4"}, parent, 1);
+			FillTable(new[]{id}, parent, 1);
 		}
 	}
 }
