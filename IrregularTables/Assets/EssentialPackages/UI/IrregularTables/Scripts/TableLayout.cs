@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace EssentialPackages.UI.IrregularTables
 {
-	public class TableLayout
+	public class TableLayout : ITableLayout
 	{
 		private ITable Table { get; }
 		private ITextRegistry<ITextComponent> TextRegistry { get; }

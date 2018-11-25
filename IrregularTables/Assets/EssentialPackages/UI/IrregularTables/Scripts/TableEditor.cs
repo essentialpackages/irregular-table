@@ -14,7 +14,7 @@ namespace EssentialPackages.UI.IrregularTables
         [SerializeField] private TableProperties _properties;
 
         private ITableDecorator Decorator { get; set; }
-        private TableLayout TableLayout { get; set; }
+        private ITableLayout TableLayout { get; set; }
 
         protected void Awake()
         {
