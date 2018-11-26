@@ -371,12 +371,12 @@ Prefab:
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 487.5
       objectReference: {fileID: 0}
     - target: {fileID: 224350884320594606, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 975
       objectReference: {fileID: 0}
     - target: {fileID: 224867418010000882, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
@@ -435,32 +435,32 @@ Prefab:
     - target: {fileID: 224523166422291754, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 900
+      value: 877.5
       objectReference: {fileID: 0}
     - target: {fileID: 224447427363098532, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 487.5
       objectReference: {fileID: 0}
     - target: {fileID: 224311973724322566, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 700
+      value: 682.5
       objectReference: {fileID: 0}
     - target: {fileID: 224038537112095318, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 500
+      value: 487.5
       objectReference: {fileID: 0}
     - target: {fileID: 224038537112095318, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1000
+      value: 975
       objectReference: {fileID: 0}
     - target: {fileID: 224288709081754292, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: 292.5
       objectReference: {fileID: 0}
     - target: {fileID: 114516336713695328, guid: f39406869c5e6cd4bb82d78f8baad426,
         type: 2}
@@ -586,6 +586,46 @@ Prefab:
         type: 2}
       propertyPath: m_textInfo.wordCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114732022176681854, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_Padding.m_Right
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114507430710800150, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224197499578675848, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 97.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224197499578675848, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 224311973724322566, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 224288709081754292, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 224523166422291754, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 224447427363098532, guid: f39406869c5e6cd4bb82d78f8baad426,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 195
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39406869c5e6cd4bb82d78f8baad426, type: 2}
@@ -839,9 +879,9 @@ MonoBehaviour:
         - 
         - 
       - _id: 6
-        _type: 1
+        _type: 2
         _refs:
-        - 
+        - Lorem ipsum dolor sit amet, consectetur adipiscing elit
     _tableBody: {fileID: 998703267}
     _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
 --- !u!1 &1851567231
