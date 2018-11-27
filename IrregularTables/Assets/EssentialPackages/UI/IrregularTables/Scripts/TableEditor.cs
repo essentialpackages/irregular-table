@@ -22,7 +22,7 @@ namespace EssentialPackages.UI.IrregularTables
 
             Debug.Log(JsonUtility.ToJson(_properties.TableData));
            
-            FillTable(new[] {"1"}, _properties.TableBody, 0);
+            FillTable(new[] {_properties.RootId}, _properties.TableBody, 0);
             Decorator?.UpdateColors(GetRootItem(), _properties.TableStyle);
         }
 

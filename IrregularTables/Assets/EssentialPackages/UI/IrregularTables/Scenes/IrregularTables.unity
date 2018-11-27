@@ -880,6 +880,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _properties:
+    _tableBody: {fileID: 998703267}
+    _rootId: 1
+    _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
     _tableData:
       _body:
       - _id: 1
@@ -910,8 +913,6 @@ MonoBehaviour:
         _type: 2
         _refs:
         - Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    _tableBody: {fileID: 998703267}
-    _style: {fileID: 11400000, guid: 29742d29cab051e43a53284dd63bd958, type: 2}
 --- !u!1 &1851567231
 GameObject:
   m_ObjectHideFlags: 0
