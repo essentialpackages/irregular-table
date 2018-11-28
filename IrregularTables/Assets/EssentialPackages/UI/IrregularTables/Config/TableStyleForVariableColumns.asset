@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a088dbb3871371542ac6fe7453768b0e, type: 3}
+  m_Name: TableStyleForVariableColumns
+  m_EditorClassIdentifier: 
+  _emptyElement: {fileID: 1646653301397898, guid: 43ae7d6e62030414795ee47a8245774b,
+    type: 2}
+  _textElement: {fileID: 1388924056159364, guid: d06631211a7e0f445ab6434d0dd49561,
+    type: 2}
+  _rowElement: {fileID: 1169680763453844, guid: b4a204903c2fdf94db707f48ec2467e9,
+    type: 2}
+  _columnElement: {fileID: 1526849388027968, guid: c61f667a96832f148bd6ba46fd6fbc54,
+    type: 2}
+  _rowColors: []

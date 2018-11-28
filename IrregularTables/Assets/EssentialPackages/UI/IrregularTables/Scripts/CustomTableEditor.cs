@@ -11,6 +11,8 @@ namespace EssentialPackages.UI.IrregularTables
     /// </summary>
     public class CustomTableEditor : TableEditor
     {
+        [SerializeField] private TableCellType _type = TableCellType.Row;
+        
         protected new void Awake()
         {
             base.Awake();
@@ -54,7 +56,7 @@ namespace EssentialPackages.UI.IrregularTables
             AddItemData(groupId3, TableCellType.StaticText, new[] {column4, column5});
 
             var rowId = Guid.NewGuid().ToString();
-            AddItemData(rowId, TableCellType.Row, new[] {groupId1, groupId2, groupId3});
+            AddItemData(rowId, _type, new[] {groupId1, groupId2, groupId3});
 
             GetRootData()?.Refs.Add(rowId);
 
