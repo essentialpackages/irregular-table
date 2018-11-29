@@ -177,7 +177,7 @@ namespace EssentialPackages.UI.IrregularTables.Tests
 	
 			var last = cells.Count;
 			
-			scriptUnderTest.CreateCustomRow("", "", "", "", "");
+			scriptUnderTest.CreateCustomEntry("", "", "", "", "");
 			
 			Assert.AreEqual(last + 4, cells.Count);
 			

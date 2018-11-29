@@ -24,7 +24,7 @@ namespace EssentialPackages.UI.IrregularTables
             
             while(true)
             {
-                CreateCustomRow(
+                CreateCustomEntry(
                     random.Next().ToString(),
                     random.Next().ToString(),
                     random.Next().ToString(),
@@ -38,14 +38,14 @@ namespace EssentialPackages.UI.IrregularTables
         /// Example method which creates three groups with overall five columns.
         /// </summary>
         /// <example>
-        /// CreateCustomRow("Lorem", "ipsum", "dolor", "sit", "amet");
+        /// CreateCustomEntry("Lorem", "ipsum", "dolor", "sit", "amet");
         /// </example>
         /// <param name="column1">Column 1</param>
         /// <param name="column2">Column 2</param>
         /// <param name="column3">Column 3</param>
         /// <param name="column4">Column 4</param>
         /// <param name="column5">Column 5</param>
-        public void CreateCustomRow(string column1, string column2, string column3, string column4,
+        public void CreateCustomEntry(string column1, string column2, string column3, string column4,
             string column5)
         {
             var groupId1 = Guid.NewGuid().ToString();
