@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a088dbb3871371542ac6fe7453768b0e, type: 3}
   m_Name: TableStyleForVariableColumns
   m_EditorClassIdentifier: 
-  _emptyElement: {fileID: 1646653301397898, guid: 43ae7d6e62030414795ee47a8245774b,
+  _emptyElement: {fileID: 1033197111399572, guid: ad2dbb77afb4d78439a97b036f397469,
     type: 2}
   _textElement: {fileID: 1388924056159364, guid: d06631211a7e0f445ab6434d0dd49561,
     type: 2}
@@ -19,4 +19,6 @@ MonoBehaviour:
     type: 2}
   _columnElement: {fileID: 1526849388027968, guid: c61f667a96832f148bd6ba46fd6fbc54,
     type: 2}
-  _rowColors: []
+  _rowColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.9411765, g: 0.9411765, b: 0.9411765, a: 1}

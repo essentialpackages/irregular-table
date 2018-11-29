@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a088dbb3871371542ac6fe7453768b0e, type: 3}
-  m_Name: TableStyle_Body
+  m_Name: TableStyleForVariableRows
   m_EditorClassIdentifier: 
   _emptyElement: {fileID: 1646653301397898, guid: 43ae7d6e62030414795ee47a8245774b,
     type: 2}
