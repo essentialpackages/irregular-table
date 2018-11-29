@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 648399889}
   - component: {fileID: 648399888}
   m_Layer: 5
-  m_Name: VerticalScrollTable
+  m_Name: HorizontalScrollTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
